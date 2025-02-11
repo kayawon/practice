@@ -1,17 +1,13 @@
 package com.ncs.sol.uplus.messaging.optout.entity;
 
-import java.io.Serializable;
-
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
-
 import jakarta.persistence.Column;
-import jakarta.persistence.Embeddable;
+import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,20 +15,37 @@ import lombok.Setter;
 
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-@DynamicUpdate
-@DynamicInsert
-@Embeddable
-@Data
-public class User implements Serializable {
+@Entity
+@Table(name = "TB_SRVC_DATA_INFO")
+public class User {
 
-	@Id
-	@Column(name = "reg_date")
-	private String regDate;
+	@EmbeddedId
+	private UserIdPK userId;
 
-	@Id
-	@Column(name = "conn_id")
-	private String connId;
-	
+	@Column(name = "dnis_no")
+	private String dnisNo;
+
+	@Column(name = "ani_no")
+	private String aniNo;
+
+	@Column(name = "reject_no")
+	private String rejectNo;
+
+	@Column(name = "auth_code")
+	private String authCode;
+
+	@Column(name = "secret_key")
+	private String secretKey;
+
+	@Column(name = "ani_hash")
+	private String aniHash;
+
+	@Column(name = "reject_hash")
+	private String rejectHash;
+
+
 }
