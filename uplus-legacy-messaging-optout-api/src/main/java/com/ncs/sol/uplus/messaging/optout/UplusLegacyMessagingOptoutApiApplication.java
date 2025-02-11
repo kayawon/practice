@@ -9,5 +9,4 @@ public class UplusLegacyMessagingOptoutApiApplication {
     public static void main(String[] args) {
         SpringApplication.run(UplusLegacyMessagingOptoutApiApplication.class, args);
     }
-
 }
