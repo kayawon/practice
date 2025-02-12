@@ -30,136 +30,136 @@ import com.ncs.sol.uplus.messaging.optout.service.OptOutCusService;
 @RestController
 public class OptOutCusController {
 
-	@Autowired
-	OptOutCusService service;
+    @Autowired
+    OptOutCusService service;
 
-	/*
-	 * // test용 데이터 User testUser = User.builder().userId(new
-	 * UserIdPK("20241025000000", "0x00000000000000")) .rejectNo("ghgh테스트12345678")
-	 * .build(); UserIdPK testId = new UserIdPK("20241025000000",
-	 * "0x00000000000000");
-	 */
+    /*
+     * // test용 데이터 User testUser = User.builder().userId(new
+     * UserIdPK("20241025000000", "0x00000000000000")) .rejectNo("ghgh테스트12345678")
+     * .build(); UserIdPK testId = new UserIdPK("20241025000000",
+     * "0x00000000000000");
+     */
 
-	// 유저 전체 리스트 조회
-	@GetMapping(value = "/users", produces = "application/json;charset=UTF-8")
-	public ResponseEntity<Response> user_list() throws Exception {
+    // 유저 전체 리스트 조회
+    @GetMapping(value = "/users", produces = "application/json;charset=UTF-8")
+    public ResponseEntity<Response> user_list() throws Exception {
 
-		/***********************************************************/
-		Response response = new Response();
+        /***********************************************************/
+        Response response = new Response();
 
-		try {
-			response.setStatus(1);
-			response.setMessage("성공");
-			response.setData(service.findAllUser());
-		} catch (Exception e) {
-			e.printStackTrace();
-			response.setStatus(2);
-			response.setMessage("실패");
-		}
+        try {
+            response.setStatus(1);
+            response.setMessage("성공");
+            response.setData(service.findAllUser());
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.setStatus(2);
+            response.setMessage("실패");
+        }
 
-		HttpHeaders httpHeaders = new HttpHeaders();
-		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
-		return new ResponseEntity<Response>(response, httpHeaders, HttpStatus.OK);
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+        return new ResponseEntity<Response>(response, httpHeaders, HttpStatus.OK);
 
-	}
+    }
 
-	// regdate로 유저 조회
-	@GetMapping(value = "/users/date/{regDate}", produces = "application/json;charset=UTF-8")
-	public ResponseEntity<Response> user_regDate_list(@PathVariable String regDate) throws Exception {
+    // regdate로 유저 조회
+    @GetMapping(value = "/users/date/{regDate}", produces = "application/json;charset=UTF-8")
+    public ResponseEntity<Response> user_regDate_list(@PathVariable String regDate) throws Exception {
 
-		/***********************************************************/
-		Response response = new Response();
+        /***********************************************************/
+        Response response = new Response();
 
-		try {
-			response.setStatus(1);
-			response.setMessage("성공");
-			/* response.setData(service.findByRegDate(regDate)); */
-			if (service.findByRegDate(regDate).isEmpty()) {
-			    response.setMessage("유저 정보가 없습니다.");
-			} else {
-			    response.setData(service.findByRegDate(regDate));
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			response.setStatus(2);
-			response.setMessage("실패");
-		}
+        try {
+            response.setStatus(1);
+            response.setMessage("성공");
+            /* response.setData(service.findByRegDate(regDate)); */
+            if (service.findByRegDate(regDate).isEmpty()) {
+                response.setMessage("유저 정보가 없습니다.");
+            } else {
+                response.setData(service.findByRegDate(regDate));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.setStatus(2);
+            response.setMessage("실패");
+        }
 
-		HttpHeaders httpHeaders = new HttpHeaders();
-		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
-		return new ResponseEntity<Response>(response, httpHeaders, HttpStatus.OK);
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+        return new ResponseEntity<Response>(response, httpHeaders, HttpStatus.OK);
 
-	}
+    }
 
-	// connId로 유저 조회
-	@GetMapping(value = "/users/id/{connId}", produces = "application/json;charset=UTF-8")
-	public ResponseEntity<Response> user_connId_list(@PathVariable String connId) throws Exception {
+    // connId로 유저 조회
+    @GetMapping(value = "/users/id/{connId}", produces = "application/json;charset=UTF-8")
+    public ResponseEntity<Response> user_connId_list(@PathVariable String connId) throws Exception {
 
-		/***********************************************************/
-		Response response = new Response();
+        /***********************************************************/
+        Response response = new Response();
 
-		try {
-			response.setStatus(1);
-			response.setMessage("성공");
-			response.setData(service.findByConnId(connId));
-		} catch (Exception e) {
-			e.printStackTrace();
-			response.setStatus(2);
-			response.setMessage("실패");
-		}
+        try {
+            response.setStatus(1);
+            response.setMessage("성공");
+            response.setData(service.findByConnId(connId));
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.setStatus(2);
+            response.setMessage("실패");
+        }
 
-		HttpHeaders httpHeaders = new HttpHeaders();
-		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
-		return new ResponseEntity<Response>(response, httpHeaders, HttpStatus.OK);
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+        return new ResponseEntity<Response>(response, httpHeaders, HttpStatus.OK);
 
-	}
+    }
 
-	// 유저 생성
-	@PostMapping(value = "/user", produces = "application/json;charset=UTF-8")
-	public ResponseEntity<Response> user_insert_action(@RequestBody User user) throws Exception {
+    // 유저 생성
+    @PostMapping(value = "/user", produces = "application/json;charset=UTF-8")
+    public ResponseEntity<Response> user_insert_action(@RequestBody User user) throws Exception {
 
-		/***********************************************************/
-		Response response = new Response();
+        /***********************************************************/
+        Response response = new Response();
 
-		try {
-			response.setStatus(1);
-			response.setMessage("성공");
-			response.setData(service.createUser(user));
-		} catch (Exception e) {
-			e.printStackTrace();
-			response.setStatus(2);
-			response.setMessage("실패");
-		}
+        try {
+            response.setStatus(1);
+            response.setMessage("성공");
+            response.setData(service.createUser(user));
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.setStatus(2);
+            response.setMessage("실패");
+        }
 
-		HttpHeaders httpHeaders = new HttpHeaders();
-		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
-		return new ResponseEntity<Response>(response, httpHeaders, HttpStatus.OK);
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+        return new ResponseEntity<Response>(response, httpHeaders, HttpStatus.OK);
 
-	}
+    }
 
-	@PutMapping(value = "/user/{userId}", produces = "application/json;charset=UTF-8")
-	public ResponseEntity<Response> user_update(@PathVariable(name = "userId") UserIdPK id,
-			@RequestPart(name = "user") User updateUser) throws Exception {
+    @PutMapping(value = "/user/{userId}", produces = "application/json;charset=UTF-8")
+    public ResponseEntity<Response> user_update(@PathVariable(name = "userId") UserIdPK id,
+            @RequestPart(name = "user") User updateUser) throws Exception {
 
-		updateUser.setUserId(id);
+        updateUser.setUserId(id);
 
-		/***********************************************************/
-		Response response = new Response();
+        /***********************************************************/
+        Response response = new Response();
 
-		try {
-			response.setStatus(1);
-			response.setMessage("성공");
-			response.setData(service.updateUser(updateUser));
-		} catch (Exception e) {
-			e.printStackTrace();
-			response.setStatus(2);
-			response.setMessage("실패");
-		}
+        try {
+            response.setStatus(1);
+            response.setMessage("성공");
+            response.setData(service.updateUser(updateUser));
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.setStatus(2);
+            response.setMessage("실패");
+        }
 
-		HttpHeaders httpHeaders = new HttpHeaders();
-		httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
-		return new ResponseEntity<Response>(response, httpHeaders, HttpStatus.OK);
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+        return new ResponseEntity<Response>(response, httpHeaders, HttpStatus.OK);
 
-	}
+    }
 
 }

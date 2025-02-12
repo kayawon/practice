@@ -16,15 +16,15 @@ import com.ncs.sol.uplus.messaging.optout.entity.UserIdPK;
 @Repository
 public interface OptOutCusRepository extends JpaRepository<User, UserIdPK> {
 
-	User findByUserId(UserIdPK id);
+    User findByUserId(UserIdPK id);
 
-	@Query("SELECT u FROM User u where u.id.regDate : regDate")
-	List<User> findByUserId_RegDate(@Param("regDate")String regDate);
+    @Query("SELECT u FROM User u where u.id.regDate = :regDate")
+    List<User> findByUserId_RegDate(@Param("regDate") String regDate);
 
-	@Query("SELECT u FROM User u where u.id.connId : connId")
-	List<User> findByUserId_ConnId(@Param("connId")String connId);
+    @Query("SELECT u FROM User u where u.id.connId = :connId")
+    List<User> findByUserId_ConnId(@Param("connId") String connId);
 
-	@Query("SELECT u FROM User u ORDER BY u.id.regDate DESC")
-	Page<User> findAllUsers(Pageable pageable);
+    @Query("SELECT u FROM User u ORDER BY u.id.regDate DESC")
+    Page<User> findAllUsers(Pageable pageable);
 
 }
